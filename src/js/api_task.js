@@ -5,6 +5,7 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 
 
 export default class FetchMoviApi {
+    
     // Отримую популярні фільми
     async getPopularData() {
         try {
