@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const API_KEY = '7c47f39dc565b202f275767eff95366e';
+const API_KEY = 'f3b7458c34b3a95455ce5f7edb53b2eb';
 const BASE_URL = 'https://api.themoviedb.org/3';
-const POPULAR_URL = `${BASE_URL}/trending/get-trending`;
+const POPULAR_URL = `${BASE_URL}/trending/movie/day`;
 const SEARCH_URL = `${BASE_URL}/search/search-movies`;
 const INFO_URL = `${BASE_URL}/movie/get-movie-details`;
 
@@ -15,23 +15,24 @@ export default class ApiFetch {
   // Отримую популярні фільми
     async getPopularData() {
         try {
-            const responce = await axios.get(`${POPULAR_URL}?api_key=${API_KEY}&page=${this.page}`);
-            console.log(responce);
-            return responce.data;
+            const response = await axios.get(`${POPULAR_URL}?api_key=${API_KEY}&page=${this.page}`);
+            // const data = await response.data;
+            console.log(response.data);
+            return response.data;
             } catch (error) {
                     console.error('Smth wrong with api get full trends' + error);
         }
-        getPopularData()
+        
     }
 
     
   // Запит по назві фільму
     
     
-    async fetchMovieSearcher(text, page) {
+    async fetchMovieSearcher(text) {
         try {
             const { data } = await axios.get(
-                `${SEARCH_URL}?api_key=${API_KEY}&query=${text}&page=${page}`,
+                `${SEARCH_URL}?api_key=${API_KEY}&query=${text}`,
             );
 
             return data;
@@ -56,3 +57,18 @@ export default class ApiFetch {
 
     
 };
+
+const newClass = new ApiFetch();
+
+newClass.getPopularData()
+
+// const urlWork = 'https://api.themoviedb.org/3/trending/all/day?api_key=f3b7458c34b3a95455ce5f7edb53b2eb';
+
+// const urlChek = `${POPULAR_URL}?api_key=${API_KEY}&page=1`;
+
+// getMovi(urlChek)
+// function getMovi(url) {
+//     fetch(url).then(res => res.json()).then(data => {
+//         console.log(data.result);
+//     })
+// }
