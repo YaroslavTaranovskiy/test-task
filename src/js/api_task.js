@@ -32,9 +32,30 @@ export default class FetchMoviApi {
             console.error('Smth wrong with api search fetch' + error);
         }
     }
+
+    // Запит по id
+
+    async fetchMovieForId(id) {
+        try {
+            const response = await axios.get(
+                `${BASE_URL}/movie/${id}?api_key=${API_KEY}`);
+            return response.data;
+            } catch (error) {
+                    console.error('Smth wrong with api search fetch' + error);
+                }
+    }
 };
 
 
 const newClass = new FetchMoviApi();
-newClass.getPopularData()
-newClass.fetchMovieSearcher("Werewolf by Night")
+// newClass.getPopularData()
+// newClass.fetchMovieSearcher("Werewolf by Night")
+newClass.fetchMovieForId(894205)
+
+function getGenerMovi(id) {
+    const newClas = new FetchMoviApi();
+    const movie = newClas.fetchMovieForId(id);
+    console.log(movie.genres);
+}
+
+getGenerMovi(894205)
