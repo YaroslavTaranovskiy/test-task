@@ -7,9 +7,9 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 export default class FetchMoviApi {
     
     // Отримую популярні фільми
-    async getPopularData() {
+    async getPopularData(page) {
         try {
-            const response = await axios.get(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}`);
+            const response = await axios.get(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}&page=${page}`);
             const data = await response.data;
             console.log(data);
             return response.data;
@@ -46,11 +46,25 @@ export default class FetchMoviApi {
     }
 };
 
+// Створення жанрів
+async function getGenres() {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=en-US`
+    );
+    console.log('response.data: ', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Smth wrong with api search fetch' + error);
+  }
+}
 
+
+getGenres();
 const newClass = new FetchMoviApi();
-// newClass.getPopularData()
+newClass.getPopularData(2)
 // newClass.fetchMovieSearcher("Werewolf by Night")
-newClass.fetchMovieForId(894205)
+// newClass.fetchMovieForId(894205)
 
 function getGenerMovi(id) {
     const newClas = new FetchMoviApi();
@@ -58,4 +72,4 @@ function getGenerMovi(id) {
     console.log(movie.genres);
 }
 
-getGenerMovi(894205)
+// getGenerMovi(894205)
