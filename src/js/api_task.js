@@ -22,10 +22,10 @@ export default class FetchMoviApi {
     // Запит по назві фільму
     
     
-    async fetchMovieSearcher(text) {
+    async fetchMovieSearcher(text, page=1) {
         try {
             const response = await axios.get(
-                `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${text}`);
+                `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${text}&page=${page}`);
             console.log(response.data);
             return response.data;
         } catch (error) {
@@ -62,8 +62,10 @@ async function getGenres() {
 
 getGenres();
 const newClass = new FetchMoviApi();
-newClass.getPopularData(2)
-// newClass.fetchMovieSearcher("Werewolf by Night")
+// newClass.getPopularData(2)
+newClass.fetchMovieSearcher("car")
+// newClass.fetchMovieSearcher("car", 2)
+
 // newClass.fetchMovieForId(894205)
 
 function getGenerMovi(id) {
